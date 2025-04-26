@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 Currency Converter</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <label for="from_currency">From Currency:</label>
+            <input type="text" id="from_currency" name="from_currency" placeholder="e.g., USD" required>
+
+            <label for="to_currency">To Currency:</label>
+            <input type="text" id="to_currency" name="to_currency" placeholder="e.g., EUR" required>
+
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" placeholder="e.g., 100" required>
+
+            <button type="submit">Convert</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <p><strong>Result:</strong> {{ result.amount }} {{ result.from }} = {{ result.converted | round(2) }} {{ result.to }}</p>
+                <p><strong>Rate:</strong> 1 {{ result.from }} = {{ result.rate | round(4) }} {{ result.to }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
